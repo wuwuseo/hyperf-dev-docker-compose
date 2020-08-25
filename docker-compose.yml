@@ -1,0 +1,47 @@
+version: '3'
+services:
+  hyperf:
+    build: ./dockerfile/hyperf
+    volumes:
+      - ./wwwroot:/wwwroot
+    ports:
+      - "9501:9501"
+    environment:
+      - APP_ENV=dev
+    tty: true
+    networks:
+      - localhost
+  mysql:
+    image: mariadb:latest
+    volumes:
+      - ./config/mysql/conf.d/:/etc/mysql/conf.d/
+      - ./data/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=dev
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev
+    networks:
+      - localhost
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - ./config/redis/redis.conf:/etc/redis/redis.conf
+      - ./data/redis:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - localhost
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - localhost
+networks:
+  localhost:
