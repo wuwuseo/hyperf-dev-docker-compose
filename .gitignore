@@ -1,5 +1,8 @@
 /config/
 /data/
+/wwwroot
+/www
+/web
 .idea
 .git
 .svn
