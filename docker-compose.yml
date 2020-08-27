@@ -22,8 +22,6 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=dev
-      - MYSQL_USER=dev
-      - MYSQL_PASSWORD=dev
     networks:
       - localhost
   redis:
