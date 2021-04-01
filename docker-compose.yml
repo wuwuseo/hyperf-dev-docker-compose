@@ -1,7 +1,7 @@
 version: '3'
 services:
   hyperf:
-    build: ./dockerfile/hyperf
+    image: hyperf/hyperf:7.4-alpine-v3.11-swoole
     volumes:
       - ./wwwroot:/wwwroot
     ports:
@@ -10,9 +10,9 @@ services:
       - APP_ENV=dev
     tty: true
     networks:
-      - localhost
+      - compose
   mysql:
-    image: mariadb:latest
+    image: mysql:latest
     volumes:
       - ./config/mysql/conf.d/:/etc/mysql/conf.d/
       - ./data/mysql:/var/lib/mysql
@@ -23,7 +23,7 @@ services:
       - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=dev
     networks:
-      - localhost
+      - compose
   redis:
     image: redis:alpine
     restart: always
@@ -33,13 +33,13 @@ services:
     ports:
       - "6379:6379"
     networks:
-      - localhost
+      - compose
   adminer:
     image: adminer:latest
     restart: always
     ports:
       - 8080:8080
     networks:
-      - localhost
+      - compose
 networks:
-  localhost:
+  compose:
