@@ -14,8 +14,8 @@ services:
   mysql:
     image: mysql:latest
     volumes:
-      - ./config/mysql/conf.d/:/etc/mysql/conf.d/
-      - ./data/mysql:/var/lib/mysql
+      - ./etc/mysql/:/etc/mysql/
+      - ./data/:/var/lib/mysql/
     ports:
       - "3306:3306"
     restart: always
